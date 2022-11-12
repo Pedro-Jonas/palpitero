@@ -1,4 +1,4 @@
-import * as userController from "../Controllers/user.Controller.js";
+import * as userController from "../Controllers/user.Controllers.js";
 import { thereIsUser } from "../middlewares/user.Midllewares.js";
 import express from "express";
 

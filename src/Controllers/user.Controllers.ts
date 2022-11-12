@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { userSchema } from "../schemas/userSchema.js";
+import { userSchema } from "../schemas/user.Schema.js";
 import {InsertUser, SelectUsers} from "../repositories/user.Repositories.js";
 
 async function postUser(req : Request, res: Response){
@@ -9,7 +9,7 @@ async function postUser(req : Request, res: Response){
         return res.status(400).send(error.message);
     };
     try{
-        InsertUser(user)
+        InsertUser(user);
         res.sendStatus(201);
     } catch {
         res.sendStatus(500);

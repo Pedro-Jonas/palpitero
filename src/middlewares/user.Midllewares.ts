@@ -1,8 +1,8 @@
-import { Request, Response,  } from "express";
+import { NextFunction, Request, Response,  } from "express";
 import { SelectUsers } from "../repositories/user.Repositories.js";
 import { User } from "../protocols/User.js"
 
-async function thereIsUser(req: Request, res: Response, next){
+async function thereIsUser(req: Request, res: Response, next: NextFunction){
     const user = req.body as User;
     try{
         const users =  await SelectUsers();
@@ -19,4 +19,6 @@ async function thereIsUser(req: Request, res: Response, next){
     next();
 };
 
-export { thereIsUser };
+export { 
+    thereIsUser
+};

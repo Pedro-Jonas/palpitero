@@ -1,7 +1,7 @@
 import { QueryResult } from "pg";
-import {connection} from "../db/db.js";
-import {User} from "../protocols/User.js"
-import {Users} from "../protocols/Users.js"
+import { connection } from "../db/db.js";
+import { User } from "../protocols/User.js"
+import { Users } from "../protocols/Users.js"
 
 async function InsertUser(user: User){
     await connection.query(`
