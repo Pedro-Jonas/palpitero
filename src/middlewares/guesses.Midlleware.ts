@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response,  } from "express";
 import { SelectUsers } from "../repositories/user.Repositories.js"
-import { SelectGames } from "../repositories/guesses.Repositories.js";
+import { SelectGames, SelectGuessesById, SelectGuessesByUserId } from "../repositories/guesses.Repositories.js";
 import { Guesse } from "../protocols/Guesse.js";
 
 async function thereIsUserAndThereAsGame(req: Request, res: Response, next: NextFunction){
@@ -22,11 +22,33 @@ async function thereIsUserAndThereAsGame(req: Request, res: Response, next: Next
         };
         res.locals.guesse = guesse;
     } catch {
-        res.sendStatus(500);
+        return res.sendStatus(500);
     };
     next();
 };
 
+async function thereIsId(req: Request, res: Response, next: NextFunction){
+    const id = req.params.id;
+
+    if (!id){
+        return res.sendStatus(404);
+    };
+
+    try{
+        const guesses =  await SelectGuessesById(id);
+
+        if (guesses.rows.length === 0){
+            return res.sendStatus(404);
+        };
+        res.locals.id = id;
+    } catch {
+        return res.sendStatus(500);
+    };
+    next();
+};
+
+
 export {
-    thereIsUserAndThereAsGame
+    thereIsUserAndThereAsGame,
+    thereIsId
 };
