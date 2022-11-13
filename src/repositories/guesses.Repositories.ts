@@ -16,4 +16,21 @@ async function InsertGuesse(guesse: Guesse){
     `,[guesse.userId, guesse.gameId, guesse.guesse]);
 };
 
-export { SelectGames, InsertGuesse };
+async function SelectGuessesById(id: string): Promise<QueryResult<Guesse>>{
+    return connection.query(`
+    SELECT * FROM guesses WHERE id = ($1);
+    `,[id]);
+};
+
+async function SelectGuessesByUserId(userId: string): Promise<QueryResult<Guesse>>{
+    return connection.query(`
+    SELECT * FROM guesses WHERE "userId" = ($1);
+    `,[userId]);
+};
+
+export { 
+    SelectGames, 
+    InsertGuesse, 
+    SelectGuessesById,
+    SelectGuessesByUserId
+};
